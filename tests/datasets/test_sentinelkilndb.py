@@ -14,6 +14,8 @@ from pytest import MonkeyPatch
 
 from torchgeo.datasets import DatasetNotFoundError, SentinelKilnDB
 
+pytest.importorskip('pyarrow')
+
 
 class TestSentinelKilnDB:
     @pytest.fixture(
