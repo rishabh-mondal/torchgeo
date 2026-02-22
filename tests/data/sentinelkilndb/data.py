@@ -35,7 +35,9 @@ def create_yolo_aa_label(num_boxes: int, num_classes: int = 3) -> np.ndarray:
         y_center = np.random.uniform(0.2, 0.8)
         width = np.random.uniform(0.05, 0.2)
         height = np.random.uniform(0.05, 0.2)
-        lines.append(f'{class_id} {x_center:.6f} {y_center:.6f} {width:.6f} {height:.6f}')
+        lines.append(
+            f'{class_id} {x_center:.6f} {y_center:.6f} {width:.6f} {height:.6f}'
+        )
     return np.array(lines, dtype=object)
 
 
@@ -58,12 +60,7 @@ def create_yolo_obb_label(num_boxes: int, num_classes: int = 3) -> np.ndarray:
         # Compute corners
         cos_a = np.cos(angle)
         sin_a = np.sin(angle)
-        corners = [
-            (-w / 2, -h / 2),
-            (w / 2, -h / 2),
-            (w / 2, h / 2),
-            (-w / 2, h / 2),
-        ]
+        corners = [(-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2)]
         rotated = []
         for dx, dy in corners:
             rx = cx + dx * cos_a - dy * sin_a

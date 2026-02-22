@@ -32,8 +32,8 @@ class SentinelKilnDB(NonGeoDataset):
 
     *SentinelKilnDB: A Large-Scale Dataset and Benchmark for OBB Brick Kiln Detection in South Asia Using Satellite Imagery*
     Accepted at NeurIPS 2025.
-    
-    
+
+
     `SentinelKilnDB <https://huggingface.co/datasets/SustainabilityLabIITGN/SentinelKilnDB>`__
     is a dataset for brick kiln detection using Sentinel-2 satellite imagery from
     South Asia. It contains over 114K images (128x128 RGB) with bounding box annotations
@@ -309,10 +309,7 @@ class SentinelKilnDB(NonGeoDataset):
         md5 = self.file_info[self.split]['md5'] if self.checksum else None
 
         download_url(
-            url=self.url.format(self.split),
-            root=self.root,
-            filename=filename,
-            md5=md5,
+            url=self.url.format(self.split), root=self.root, filename=filename, md5=md5
         )
 
     def plot(

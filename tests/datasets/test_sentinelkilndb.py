@@ -17,9 +17,7 @@ from torchgeo.datasets import DatasetNotFoundError, SentinelKilnDB
 
 class TestSentinelKilnDB:
     @pytest.fixture(
-        params=product(
-            ['train', 'validation', 'test'], ['horizontal', 'oriented']
-        )
+        params=product(['train', 'validation', 'test'], ['horizontal', 'oriented'])
     )
     def dataset(
         self, monkeypatch: MonkeyPatch, tmp_path: Path, request: SubRequest
