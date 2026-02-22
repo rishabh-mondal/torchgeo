@@ -75,7 +75,7 @@ def create_yolo_obb_label(num_boxes: int, num_classes: int = 3) -> np.ndarray:
 def create_test_data(root: Path) -> None:
     """Create SentinelKilnDB test dataset with parquet files."""
     splits = ['train', 'validation', 'test']
-    samples_per_split = {'train': 3, 'validation': 2, 'test': 2}
+    samples_per_split = {'train': 4, 'validation': 2, 'test': 2}
 
     np.random.seed(42)
 
@@ -87,10 +87,17 @@ def create_test_data(root: Path) -> None:
             # Create image bytes
             img_bytes = create_dummy_image_bytes()
 
-            # Create labels (first sample in each split has no boxes - negative sample)
+            # Create labels with different cases for coverage
             if i == 0:
+                # Empty labels (negative sample)
                 yolo_aa = np.array([], dtype=object)
                 yolo_obb = np.array([], dtype=object)
+            elif i == 1 and split == 'train':
+                # Malformed labels (too few parts) - to test skip logic
+                yolo_aa = np.array(['0 0.5 0.5'], dtype=object)  # Only 3 parts, need 5
+                yolo_obb = np.array(
+                    ['0 0.1 0.2 0.3'], dtype=object
+                )  # Only 4 parts, need 9
             else:
                 num_boxes = np.random.randint(1, 4)
                 yolo_aa = create_yolo_aa_label(num_boxes)

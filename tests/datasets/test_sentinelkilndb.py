@@ -71,7 +71,7 @@ class TestSentinelKilnDB:
 
     def test_len(self, dataset: SentinelKilnDB) -> None:
         if dataset.split == 'train':
-            assert len(dataset) == 3
+            assert len(dataset) == 4
         else:
             assert len(dataset) == 2
 
